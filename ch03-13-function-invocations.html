@@ -1,0 +1,37 @@
+<!-- Function invocations and some tests to prove the differences -->
+
+<html>
+  <head>
+    <script type="text/javascript" src="ch03-07-assert.js"></script>
+    <link rel="stylesheet" type="text/css" href="ch03-09-styles.css"></link>
+    <title>Functional invocations and some tests</title>
+  </head>
+  <body id="results">
+    <script type="text/javascript">
+
+      // FUNCTIONAL invocation
+      function creep() { return this; }
+      assert(creep() === window, "Functional invocation: this is equal to window");
+
+      var sneak = creep;
+      assert(sneak() === window, "Again functional invocation: this equals window");
+      
+      var ninja1 = {
+        skulk: creep // creep references the original creep() function, returning this
+      };
+
+      // Invocation as a METHOD
+      assert(ninja1.skulk() === ninja1, "Method invocation that calls a function that returns this, which is equal to ninja1");
+
+      var ninja2 = {
+        skulk: creep // again, the creep function is referenced
+      };
+      assert(ninja2.skulk() === ninja2, "Method invocation: the method adopts the context of the object that invokes it");
+
+      var ninja3 = {};
+      ninja3.skulk = creep;
+      assert(ninja3.skulk() === ninja3, "Skulk invoked in context of ninja3 object");
+
+    </script>
+  </body>
+</html>

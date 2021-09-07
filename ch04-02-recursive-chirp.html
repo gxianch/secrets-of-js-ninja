@@ -1,0 +1,27 @@
+<!-- Example recursion pattern - ninja chirp -->
+
+<html>
+  <head>
+    <script type="text/javascript" src="ch03-07-assert.js"></script>
+    <link rel="stylesheet" type="text/css" href="ch03-09-styles.css"></link>
+    <title>Palindrome test. An example of a recursive function</title>
+  </head>
+  <body>
+    <ul id="results"></ul> <!-- Test results attach to this node -->
+    <script type="text/javascript">
+
+      // recursive function that satisfies the two criteria for recursion:
+      // 1: The function calls itself
+      // 2: The function converges towards termination (in this case the value of
+      //    parameter n decreases towards the termination state of < 1
+      function chirp(n) {
+        return n > 1 ? chirp(n - 1) + "-chirp" : "chirp";
+      }
+
+      // Note: a recursive function that does not converge towards termination
+      //       is called an infinite loop
+
+      assert(chirp(3) == "chirp-chirp-chirp", "Calling the named function comes naturally");
+    </script>
+  </body>
+</html>

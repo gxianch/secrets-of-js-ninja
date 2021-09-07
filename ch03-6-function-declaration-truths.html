@@ -1,0 +1,67 @@
+<!--
+Chapter 3: Function decalarations
+ ------------------------------------
+ Rules:
+ - Must use the function keyword
+ - Can optionally contain a name. Without a name
+   the function is said to be anonymous
+ - Must be followed by parentheses that contain an optional
+   comma separated list of parameter names
+ - Curly braces '{}' that enclose the body of the function
+ - The body is made up of a series of Javascript Statements
+ - Body can be empty, but braces must always be present
+ Notes:
+ - When a function is named, that name is valid throughout
+   the scope within which it is declared
+ - If a function is declared in the global scope, then a property
+   is created on the window that references the function
+ - All functions have a property called name. If the function
+   is anonymous, then the name is empty string ("")
+-->
+
+<html>
+  <head>
+    <title>Test function declaration rules</title>
+    <!-- Include the assert function here -->
+    <script type="text/javascript" src="ch03-07-assert.js"></script>
+    <style>
+      #results li.pass { color : green; }
+      #results li.fail { color : red; }
+    </style>
+  </head>
+  <body>
+
+    <!-- Script to test the truthiness of the function declaration rules -->
+    <script type="text/javascript">
+
+      function isNimble(){ return true; };
+      assert(typeof window.isNimble === "function", "isNimble() is a function.");
+      assert(isNimble.name === "isNimble", "isNimble() named isNimble");
+
+      var canFly = function() { return true; };
+      assert(typeof window.canFly === "function", "canFly() is a function");
+      assert(canFly.name === "", "canFly() has no name");
+      
+      window.isDeadly = function() { return true; };
+      assert(typeof window.isDeadly === "function", "isDeadly() is a function");
+      assert(window.isDeadly.name == "", "isDeadly() is anonymous therefore it's name property is equal to empty string");
+
+      function outer() {
+        assert(typeof inner === "function", "inner() in scope before declaration");
+        function inner() {}
+        assert(typeof inner === "function", "inner() in scope after declaration");
+        assert(window.inner === undefined, "inner() not in global scope");
+      }
+
+     outer();
+     assert(window.inner === undefined, "inner() still not in global scope");
+     assert(typeof window.outer === "function", "outer() is in global scope and therefore added as a property to window");
+     assert(window.outer.inner === undefined, "We can't access inner functions from the global scope");
+
+     window.wieldSword = function swingSword() { return true; };
+     assert(window.wieldSword.name === "swingSword", "wieldSword variable takes on name property of swingSword()");
+
+    </script>
+    <ul id="results"></ul>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script type="text/javascript" src="ch03-07-assert.js"></script>
+    <link rel="stylesheet" type="text/css" href="ch03-09-styles.css"></link>
+    <title>Scoping and functions</title>
+  </head>
+  <body id="results">
+    <script type="text/javascript">
+      if (window) {
+        var x = 213;
+      }
+      
+      function outer() {
+        var y = 214;
+      }
+      outer();
+      assert(x === 213, "block scope delimited by {} not enforced");
+      assert(window.y === undefined, "Function hides variable 'y' from global scope");
+
+    </script>
+  </body>
+</html>

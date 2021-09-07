@@ -1,0 +1,36 @@
+<!-- Function invocations and some tests to prove the differences -->
+
+<html>
+  <head>
+    <script type="text/javascript" src="ch03-07-assert.js"></script>
+    <link rel="stylesheet" type="text/css" href="ch03-09-styles.css"></link>
+    <title>Functional invocations and some tests</title>
+  </head>
+  <body id="results">
+    <script type="text/javascript">
+      function juggle () {
+        var result = 0;
+        for (var n=0; n < arguments.length; n++) {
+          result += arguments[n];
+        }
+        this.result = result;
+      }
+
+      var ninja1 = {};
+      var ninja2 = {};
+
+      // apply is a method present on all functions      
+      // it takes two parameters. The first is the object to appy the function to.
+      // The second is an array of values to be used as invocation arguments
+      juggle.apply(ninja1,[1,2,3,4]);
+
+      // call is similar, but takes an object and then the arguments are passed in
+      // directly in the arguments list
+      juggle.call(ninja2, 1,2,3,4);
+
+      assert(ninja1.result === 10, "Juggled via apply");
+      assert(ninja2.result === 10, "Juggled via call");
+
+    </script>
+  </body>
+</html>

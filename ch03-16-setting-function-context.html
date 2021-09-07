@@ -1,0 +1,32 @@
+<!-- Using call to define the context in a callback function -->
+
+<html>
+  <head>
+    <script type="text/javascript" src="ch03-07-assert.js"></script>
+    <link rel="stylesheet" type="text/css" href="ch03-09-styles.css"></link>
+    <title>Setting function context in callbacks</title>
+  </head>
+  <body>
+    <ul id="results"></ul>
+    <script type="text/javascript">
+      // forcing the function context in callbacks
+      function forEach (collection, callback) {
+        // Note usually we'd check that the arguments are of the correct type
+        // here (collection is typeof "array" and callback is "function"
+        for (var n=0; n < collection.length; n++) {
+          callback.call(collection[n], n);
+        }
+      }
+
+      // Define the collection
+      var weapons = ["staff", "shuriken", "sai", "sword", "nunchucks"];
+
+      // Test the function
+      forEach(weapons, function(index) {
+          assert(this == weapons[index], "Got the expected weapon: " + weapons[index]);
+          }
+      );
+          
+    </script>
+  </body>
+</html>

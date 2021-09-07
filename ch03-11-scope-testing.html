@@ -1,0 +1,92 @@
+<!-- Testing functional scope -->
+<!--
+This series of tests proves the following rules about functional scope:
+- Named functions are in scope from anywhere within the scope in which they
+  are declared (sometimes called hoisting)
+- Variables are not hoisted. Rather they are in scope from the point
+  at which they are declared
+- Therefore we can say that functions can be forward referenced
+  in their scope  but varibles can't
+- For the purpose of scope declaration, the global scope acts as one
+  encompassing function that wraps the code on the page
+- Note: This code produces some failing tests for illustration purposes
+-->
+
+<html>
+  <head>
+    <script type="text/javascript" src="ch03-07-assert.js"></script>
+    <link rel="stylesheet" type="text/css" href="ch03-09-styles.css"></link>
+    <title>Scoping and functions</title>
+  </head>
+  <body id="results">
+    <script type="text/javascript">
+      // test using assert(value, desc)
+      assert(true, "TESTING: BEFORE outer()");
+      assert(typeof outer === "function", "outer() is in scope");
+      assert(typeof inner === "function", "inner() is in scope");
+      assert(typeof a     === "number", "a is in scope");
+      assert(typeof b     === "number", "b is in scope");
+      assert(typeof c     === "number", "c is in scope");
+      
+      function outer() {
+      // test using assert(value, desc)
+      assert(true, "TESTING: INSIDE outer() BEFORE a");
+      assert(typeof outer === "function", "outer() is in scope");
+      assert(typeof inner === "function", "inner() is in scope");
+      assert(typeof a     === "number", "a is in scope");
+      assert(typeof b     === "number", "b is in scope");
+      assert(typeof c     === "number", "c is in scope");
+      
+        var a = 1;
+      // test using assert(value, desc)
+      assert(true, "TESTING: INSIDE outer() AFTER a");
+      assert(typeof outer === "function", "outer() is in scope");
+      assert(typeof inner === "function", "inner() is in scope");
+      assert(typeof a     === "number", "a is in scope");
+      assert(typeof b     === "number", "b is in scope");
+      assert(typeof c     === "number", "c is in scope");
+      
+        function inner() { /* does nothing */ }
+        var b = 2;
+
+      // test using assert(value, desc)
+      assert(true, "TESTING: INSIDE outer(), AFTER inner() AND b");
+      assert(typeof outer === "function", "outer() is in scope");
+      assert(typeof inner === "function", "inner() is in scope");
+      assert(typeof a     === "number", "a is in scope");
+      assert(typeof b     === "number", "b is in scope");
+      assert(typeof c     === "number", "c is in scope");
+      
+        if (a == 1) {
+          var c = 3;
+              // test using assert(value, desc)
+      assert(true, "TESTING: INSIDE outer() AND INSIDE if");
+      assert(typeof outer === "function", "outer() is in scope");
+      assert(typeof inner === "function", "inner() is in scope");
+      assert(typeof a     === "number", "a is in scope");
+      assert(typeof b     === "number", "b is in scope");
+      assert(typeof c     === "number", "c is in scope");
+      
+        }
+        // test using assert(value, desc)
+      assert(true, "TESTING: INSIDE outer() OUTSIDE if");
+      assert(typeof outer === "function", "outer() is in scope");
+      assert(typeof inner === "function", "inner() is in scope");
+      assert(typeof a     === "number", "a is in scope");
+      assert(typeof b     === "number", "b is in scope");
+      assert(typeof c     === "number", "c is in scope");
+      
+      }
+     outer();
+
+      // test using assert(value, desc)
+      assert(true, "TESTING: AFTER outer()");
+      assert(typeof outer === "function", "outer() is in scope");
+      assert(typeof inner === "function", "inner() is in scope");
+      assert(typeof a     === "number", "a is in scope");
+      assert(typeof b     === "number", "b is in scope");
+      assert(typeof c     === "number", "c is in scope");
+      
+    </script>
+  </body>
+</html>

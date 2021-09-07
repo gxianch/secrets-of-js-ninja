@@ -1,0 +1,25 @@
+<!-- Function invocations and some tests to prove the differences -->
+
+<html>
+  <head>
+    <script type="text/javascript" src="ch03-07-assert.js"></script>
+    <link rel="stylesheet" type="text/css" href="ch03-09-styles.css"></link>
+    <title>Functional invocations and some tests</title>
+  </head>
+  <body id="results">
+    <script type="text/javascript">
+      function Ninja() {
+        this.skulk = function() { return this; };
+      }
+      
+      var ninja1 = new Ninja();
+      var ninja2 = new Ninja();
+
+      assert(typeof ninja1.skulk === "function", "The skulk function exists on ninja1");
+      assert(ninja1.skulk() === ninja1, "The first ninja is skulking");
+      assert(typeof ninja2.skulk === "function", "The skulk function exists on ninja2");
+      assert(ninja2.skulk() === ninja2, "The second ninja is skulking");
+
+    </script>
+  </body>
+</html>

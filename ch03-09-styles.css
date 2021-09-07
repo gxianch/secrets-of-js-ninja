@@ -1,0 +1,6 @@
+/* Stylesheet used for assertion results
+ * ------------------------------------- */
+
+ul { background : yellow; padding: 12px; }
+#results li.pass { color : green; margin-left: 20px; }
+#results li.fail { color : red; text-decoration:line-through; margin-left: 20px; }

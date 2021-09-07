@@ -1,0 +1,66 @@
+<!-- Testing functional scope -->
+<!--
+This experiment tests what would happen if we refactor our set of tests
+into a function. What we find this proves is that:
+- All varibles and functions are out of scope except for outer.
+- This is because the function 'tests()' is defined in the global scope
+  which means it only has access to the globally accessable functions
+  and variables that have already been declared.
+-->
+
+<html>
+  <head>
+    <script type="text/javascript" src="ch03-07-assert.js"></script>
+    <link rel="stylesheet" type="text/css" href="ch03-09-styles.css"></link>
+    <title>Scoping and functions</title>
+  </head>
+  <body id="results">
+    <script type="text/javascript">
+      // test using assert(value, desc)
+    function tests() {
+      assert(true, "TEST!!!!");
+      assert(typeof outer === "function", "outer() is in scope");
+      assert(typeof inner === "function", "inner() is in scope");
+      assert(typeof a     === "number", "a is in scope");
+      assert(typeof b     === "number", "b is in scope");
+      assert(typeof c     === "number", "c is in scope");
+    }
+
+    function outer() {
+      // Second function defined in a different scope yields results
+      // relevant to the scope in which it is defined
+     function tests2() {
+      assert(true, "TEST2!!!!");
+      assert(typeof outer === "function", "outer() is in scope");
+      assert(typeof inner === "function", "inner() is in scope");
+      assert(typeof a     === "number", "a is in scope");
+      assert(typeof b     === "number", "b is in scope");
+      assert(typeof c     === "number", "c is in scope");
+    } // test using assert(value, desc)
+      tests2();
+
+      var a = 1;
+      // test using assert(value, desc)
+      tests();
+      function inner() { /* does nothing */ }
+      var b = 2;
+
+      // test using assert(value, desc)
+      tests();
+
+      if (a == 1) {
+        var c = 3;
+        // test using assert(value, desc)
+        tests();
+
+      }
+      // test using assert(value, desc)
+      tests();
+    }
+    outer();
+
+    // test using assert(value, desc)
+    tests();
+</script>
+  </body>
+</html>

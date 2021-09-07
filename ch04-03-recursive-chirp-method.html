@@ -1,0 +1,25 @@
+<!-- Example recursion pattern with an anonymous function -->
+
+<html>
+  <head>
+    <script type="text/javascript" src="ch03-07-assert.js"></script>
+    <link rel="stylesheet" type="text/css" href="ch03-09-styles.css"></link>
+    <title>Palindrome test. An example of a recursive function</title>
+  </head>
+  <body>
+    <ul id="results"></ul> <!-- Test results attach to this node -->
+    <script type="text/javascript">
+
+      // Anonymous recursive function is now a method acessed through
+      // the  property chirp of the ninja object
+
+      var ninja = {
+          chirp: function (n) {
+            return n > 1 ? this.chirp(n - 1) + "-chirp" : "chirp";
+        }
+      };
+      
+      assert(ninja.chirp(3) == "chirp-chirp-chirp", "Calling the named function comes naturally");
+    </script>
+  </body>
+</html>

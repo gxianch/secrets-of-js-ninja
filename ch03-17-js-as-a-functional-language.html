@@ -1,0 +1,42 @@
+<!-- Using call to define the context in a callback function -->
+
+<html>
+  <head>
+    <script type="text/javascript" src="ch03-07-assert.js"></script>
+    <link rel="stylesheet" type="text/css" href="ch03-09-styles.css"></link>
+    <title>Setting function context in callbacks</title>
+  </head>
+  <body id="results">
+    <script type="text/javascript">
+
+      // As a sumary of the functional features of Javascript,
+      // we have learned that functions are first class objects
+      // that are treated like any other object type. They can be:
+
+      // Created via literals
+      var myAction = function(params) {};
+      
+      // Assigned to variables or properties
+      myAction.doSomething = function(){};
+
+      // Passed as parameters
+      if (myAction.doSomething()){
+        function doSomethingElse(){};
+      }
+      
+      // Returned as function results
+      function aFunctionThatReturnsAFunction(){
+        return function() { /* do something */ };
+      }
+
+      // Possess properties and methods
+      var move = function (posX, posY, velocity) {
+        this.x = posX;
+        this.y = posY;
+        this.move = function(){ /* move */ };
+      };
+
+      
+    </script>
+  </body>
+</html>
